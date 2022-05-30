@@ -1,1 +1,5 @@
 <h1>Сategories of doctors</h1>
+<%= render 'form', category: @category %>
+<% @categories.each do |cat| %>
+	<p><%= cat.name %> <%= link_to "X", cat, method: :delete %></p>
+<% end %>
