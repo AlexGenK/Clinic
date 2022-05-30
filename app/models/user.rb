@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :category, optional: true
+
   validates :phone, uniqueness: true
 
   def email_required?
