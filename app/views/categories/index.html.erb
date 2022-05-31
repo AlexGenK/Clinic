@@ -3,6 +3,6 @@
 <% @categories.each do |cat| %>
 	<p><%= cat.name %> <%= link_to "X", cat, method: :delete %></p>
 	<% cat.users.order(:username).each do |user| %>
-		<%= "---> #{user.username}" %>
+		<%= "---> #{user.username}" %><br/>
 	<% end %>
 <% end %>
