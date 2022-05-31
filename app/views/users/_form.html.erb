@@ -1,0 +1,16 @@
+<%= form_for user do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+  <%= f.label :category_id %>
+  <%= f.select :category_id, cat_list, { include_blank: true } %>
+  <%= f.label :user_role %>
+  <%= f.check_box :user_role %>
+  <%= f.label :doctor_role %>
+  <%= f.check_box :doctor_role %>
+  <%= f.label :admin_role %>
+  <%= f.check_box :admin_role %>
+
+  <%= f.button type: 'submit' %>
+<% end %>
