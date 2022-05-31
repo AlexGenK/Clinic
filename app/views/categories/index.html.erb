@@ -2,7 +2,7 @@
 <%= render 'form', category: @category %>
 <% @categories.each do |cat| %>
 	<p><%= cat.name %> <%= link_to "X", cat, method: :delete %></p>
-	<% cat.users.order(:username).each do |user| %>
+	<% cat.doctors.order(:username).each do |user| %>
 		<%= "---> #{user.username}" %><br/>
 	<% end %>
 <% end %>
