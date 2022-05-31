@@ -1,0 +1,8 @@
+<h1>Appointments</h1>
+<% @appointments.each do |app| %>
+	<p>
+		Doctor: <%= app.doctor.username %><br/>
+		Patient: <%= app.patient.username %><br/>
+		Recomendation: <%= app.recommendation %><br/>
+	</p> 
+<% end %>
