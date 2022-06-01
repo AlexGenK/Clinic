@@ -1,8 +1,12 @@
 class AppointmentsController < ApplicationController
-  before_action :set_doctor, only: [:new]
+  before_action :set_persons, only: [:index, :new]
 
   def index
-    @appointments = Appointment.order(:created_at) 
+    if @doctor == nil
+      @appointments = @patient.appointments.order(created_at: 'desc')
+    else
+      @appointments = @doctor.appointments.order(created_at: 'desc')
+    end 
   end
 
   def new
@@ -11,9 +15,20 @@ class AppointmentsController < ApplicationController
     redirect_to appointments_path
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   private
 
-  def set_doctor
-    @doctor = Doctor.find(params[:doctor_id])
+  def appointment_params
+    params.require(:appiontment).permin(:recommendation)
+  end
+
+  def set_persons
+    @doctor = Doctor.find_by(id: params[:doctor_id])
+    @patient = Patient.find_by(id: params[:user_id])
   end
 end

@@ -17,7 +17,13 @@
     <p>
       <%= link_to "Categories", categories_path %> 
       <%= link_to "Users", users_path %>
-      <%= link_to "Appointments", appointments_path %>
+      <% if user_signed_in? %>
+        <% if current_user.user_role? %>
+          <%= link_to "Appointments", user_appointments_path(current_user) %>
+        <% elsif current_user.doctor_role? %>
+          <%= link_to "Appointments", doctor_appointments_path(current_user) %>
+        <% end %>
+      <% end %>
     </p>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> 

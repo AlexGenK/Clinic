@@ -2,8 +2,8 @@
 <%= render 'form', category: @category %>
 <% @categories.each do |cat| %>
 	<p><%= cat.name %> <%= link_to "X", cat, method: :delete %></p>
-	<% cat.doctors.order(:username).each do |doc| %>
-		<%= "---> #{doc.username}" %>
-		<%= link_to '+', new_doctor_appointment_path(doc) %><br/>
+	<% cat.doctors.order(:username).each do |doctor| %>
+		<%= "---> #{doctor.username}" %>
+		<%= link_to '+', new_doctor_appointment_path(doctor) %><br/>
 	<% end %>
 <% end %>
