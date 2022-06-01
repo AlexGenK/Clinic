@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
-  before_action :set_persons, only: [:index, :new, :destroy]
-  before_action :set_appointment, only: [:update, :destroy]
+  before_action :set_persons, only: [:index, :new, :destroy, :edit, :update]
+  before_action :set_appointment, only: [:update, :destroy, :edit]
 
   def index
     if @doctor == nil
@@ -20,6 +20,12 @@ class AppointmentsController < ApplicationController
   end
 
   def update
+    @appointment.update(appointment_params ) 
+    if (@appointment.recommendation != nil) || (@appointment.recommendation != '')
+      @appointment.closed = true
+      @appointment.save
+    end
+    redirect_to doctor_appointments_path(@doctor)
   end
 
   def destroy
@@ -30,7 +36,7 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appiontment).permin(:recommendation)
+    params.require(:appointment).permit(:recommendation)
   end
 
   def set_persons

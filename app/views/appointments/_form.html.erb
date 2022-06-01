@@ -1,0 +1,5 @@
+<%= form_for [doctor, appointment] do |f| %>
+  <%= f.label :recommendation %>
+  <%= f.text_field :recommendation %>
+  <%= f.button type: 'submit' %>
+<% end %>
