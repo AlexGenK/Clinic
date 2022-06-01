@@ -12,9 +12,14 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @appointment = @doctor.appointments.new(patient_id: current_user.id) 
-    @appointment.save
-    redirect_to user_appointments_path(current_user)
+    if @doctor.can_add_appointment?
+      @appointment = @doctor.appointments.new(patient_id: current_user.id) 
+      @appointment.save
+      redirect_to user_appointments_path(current_user)
+      return
+    else
+      redirect_to categories_path, alert: 'Number of open appointments exceeded'
+    end
   end
 
   def edit
