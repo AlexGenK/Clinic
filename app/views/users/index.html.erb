@@ -2,7 +2,7 @@
 <% @users.each do |user| %>
 <p>
   <%= link_to user.username, edit_user_path(user) %>
-  <%= link_to "X", user, method: :delete %>
+  <%= link_to "X", user, method: :delete %><br/>
   <%= user.phone %>
   <%= user.category&.name %>
 </p>

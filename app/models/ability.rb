@@ -8,6 +8,7 @@ class Ability
 
     if user.admin_role?
         can :manage, :all
+        cannot :manage, Appointment
     end
 
     if user.doctor_role?
@@ -17,7 +18,7 @@ class Ability
 
     if user.user_role?
       can [:read], Category
-      can [:new], Appointment
+      can [:new, :read], Appointment
     end
   end
 end

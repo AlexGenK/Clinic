@@ -1,9 +1,19 @@
 <h1>Сategories of doctors</h1>
-<%= render 'form', category: @category %>
+<% if can? :new, Category %> 
+	<%= render 'form', category: @category %>
+<% end %>
 <% @categories.each do |cat| %>
-	<p><%= cat.name %> <%= link_to "X", cat, method: :delete %></p>
+	<p>
+		<%= cat.name %>
+		<% if can? :destroy, cat %> 
+			<%= link_to "X", cat, method: :delete %>
+		<% end %>
+	</p>
 	<% cat.doctors.order(:username).each do |doctor| %>
 		<%= "---> #{doctor.username}" %>
-		<%= link_to '+', new_doctor_appointment_path(doctor) %><br/>
+		<% if can? :new, Appointment %>
+			<%= link_to '+', new_doctor_appointment_path(doctor) %>
+		<% end %>
+		<br/>
 	<% end %>
 <% end %>

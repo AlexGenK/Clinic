@@ -5,8 +5,10 @@
     Patient: <%= app.patient.username %><br/>
     Recomendation: <%= app.recommendation %><br/>
     Closed: <%= app.closed %><br/>
-    <% if current_user.doctor_role? %>
+    <% if can? :edit, app %>
       <%= link_to 'Edit', edit_doctor_appointment_path(@doctor, app) %>
+    <% end %>
+    <% if can? :destroy, app %>
       <%= link_to 'X', doctor_appointment_path(@doctor, app), method: :delete %>
     <% end %>
   </p> 
