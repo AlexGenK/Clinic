@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:alert] = "You do not have permission to perform this operation"
+    redirect_back fallback_location: root_path
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit :sign_up, keys: [:phone, :email, :username]
   end

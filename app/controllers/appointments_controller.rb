@@ -1,6 +1,7 @@
 class AppointmentsController < ApplicationController
   before_action :set_persons, only: [:index, :new, :destroy, :edit, :update]
   before_action :set_appointment, only: [:update, :destroy, :edit]
+  load_and_authorize_resource
 
   def index
     if @doctor == nil
