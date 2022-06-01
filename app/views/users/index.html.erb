@@ -1,9 +1,9 @@
 <h1>Users</h1>
 <% @users.each do |user| %>
 <p>
-  <%= link_to user.username, edit_user_path(user) %>
-  <%= link_to "X", user, method: :delete %><br/>
-  <%= user.phone %>
+  <%= link_to user.username, edit_user_path(user) %><br/>
+  <%= user.phone %><br/>
+  <%= user.email %><br/>
   <%= user.category&.name %>
 </p>
 <% end %>
