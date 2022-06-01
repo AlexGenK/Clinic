@@ -8,4 +8,14 @@ FactoryBot.define do
     admin_role    { false }
     doctor_role   { true }
   end
+
+  factory :user_admin, class: User do
+    username      { 'Chee-Chee' }
+    phone         { '+380502223322' }
+    email         { Faker::Internet.unique.email }
+    password      { '123456' }
+    user_role     { false }
+    admin_role    { true }
+    doctor_role   { false }
+  end
 end
