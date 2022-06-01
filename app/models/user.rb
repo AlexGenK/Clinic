@@ -7,7 +7,7 @@ class User < ApplicationRecord
   belongs_to :category, optional: true
 
   validates :phone, uniqueness: true
-  validates :phone, format: { with: /\+380[1,3-9][0-9]{8}/, message: 'Phone number must be in format +380yyxxxxxxx' }
+  validates :phone, format: { with: /\A\+380[1,3-9][0-9]{8}\z/, message: 'Phone number must be in format +380yyxxxxxxx' }
 
   def email_required?
     false
