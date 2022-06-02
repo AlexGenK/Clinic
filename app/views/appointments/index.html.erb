@@ -1,15 +1,27 @@
 <h1>Appointments</h1>
-<% @appointments.each do |app| %>
-  <p>
-    Doctor: <%= app.doctor.username %><br/>
-    Patient: <%= app.patient.username %><br/>
-    Recomendation: <%= app.recommendation %><br/>
-    Closed: <%= app.closed %><br/>
-    <% if can? :edit, app %>
-      <%= link_to 'Edit', edit_doctor_appointment_path(@doctor, app) %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Doctor</th>
+      <th scope="col">Patient</th>
+      <th scope="col">Recommendation</th>
+      <th scope="col">Closed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @appointments.each do |app| %>
+      <tr>
+        <td>
+          <% if can? :edit, app %>
+            <%= link_to app.doctor.username, edit_doctor_appointment_path(@doctor, app) %>
+          <% else %>
+            <%= app.doctor.username %>
+          <% end %>
+        </td>
+        <td><%= app.patient.username %></td>
+        <td><%= app.recommendation %></td>
+        <td><%= app.closed? ? 'Х' : '' %></td>
+      </tr>
     <% end %>
-    <% if can? :destroy, app %>
-      <%= link_to 'X', doctor_appointment_path(@doctor, app), method: :delete %>
-    <% end %>
-  </p> 
-<% end %>
+  </tbody>
+</table>

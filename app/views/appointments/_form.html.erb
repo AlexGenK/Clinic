@@ -1,5 +1,9 @@
 <%= form_for [doctor, appointment] do |f| %>
-  <%= f.label :recommendation %>
-  <%= f.text_field :recommendation %>
-  <%= f.button type: 'submit' %>
+  <div class="mb-3">
+    <%= f.label :recommendation, class: 'form-label' %>
+    <%= f.text_area :recommendation, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= f.button type: 'submit', class: "btn btn-primary" %>
+  </div>
 <% end %>
