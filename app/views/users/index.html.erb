@@ -1,9 +1,27 @@
 <h1>Users</h1>
-<% @users.each do |user| %>
-<p>
-  <%= link_to user.username, edit_user_path(user) %><br/>
-  <%= user.phone %><br/>
-  <%= user.email %><br/>
-  <%= user.category&.name %>
-</p>
-<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Category</th>
+      <th scope="col">User</th>
+      <th scope="col">Doctor</th>
+      <th scope="col">Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.username, edit_user_path(user) %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.email %></td>
+        <td><%= user.category&.name %></td>
+        <td><%= user.user_role? ? 'Х' : '' %></td>
+        <td><%= user.doctor_role? ? 'Х' : '' %></td>
+        <td><%= user.admin_role? ? 'Х' : '' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

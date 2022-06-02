@@ -7,16 +7,16 @@
     <div class="accordion-item">
       <h2 class="accordion-header" id='<%= "head-cat-#{cat.id}" %>'>
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target='#<%= "collapse-cat-#{cat.id}" %>'>
-            <% if can? :destroy, cat %> 
+          <% if can? :destroy, cat %>
             <%= link_to "Del", cat, method: :delete, class: 'btn btn-danger me-2' %>
           <% end %>
-              <b><%= cat.name %></b>
-            </button>
+          <b><%= cat.name %></b>
+        </button>
       </h2>
       <div id='<%= "collapse-cat-#{cat.id}" %>' class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <% cat.doctors.order(:username).each do |doctor| %>
-                <% if can? :new, Appointment %>
+        <div class="accordion-body">
+          <% cat.doctors.order(:username).each do |doctor| %>
+            <% if can? :new, Appointment %>
               <%= link_to 'Create Appointment', new_doctor_appointment_path(doctor), class: "btn btn-primary mb-2" %>
             <% end %>
             <%= doctor.username %>
@@ -25,5 +25,5 @@
         </div>
       </div>
     </div>
-  <% end %> 
+  <% end %>
 </div>
