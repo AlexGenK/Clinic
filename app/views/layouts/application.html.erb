@@ -30,11 +30,11 @@
             <% if user_signed_in? %>
               <% if can? :new, Appointment %>
                 <li class="nav-item">
-                  <%= link_to "Appointments", user_appointments_path(current_user) %>
+                  <%= link_to "Appointments", user_appointments_path(current_user), class: "nav-link" %>
                 </li>
               <% elsif can? :read, Appointment %>
                 <li class="nav-item">
-                  <%= link_to "Appointments", doctor_appointments_path(current_user) %>
+                  <%= link_to "Appointments", doctor_appointments_path(current_user), class: "nav-link" %>
                 </li>
               <% end %>
             <% end %> 
