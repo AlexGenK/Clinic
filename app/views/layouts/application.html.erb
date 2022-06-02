@@ -12,24 +12,62 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <p align='right'>User: <%= current_user.username %> | <%= link_to "exit", destroy_user_session_path, method: :delete %>
-    <% end %>
-    <p>
-      <%= link_to "Categories", categories_path %>
-      <% if can? :manage, User %> 
-        <%= link_to "Users", users_path %>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to "Categories", categories_path, class: "nav-link" %>
+            </li>
+            <% if can? :manage, User %>
+              <li class="nav-item">
+                <%= link_to "Users", users_path, class: "nav-link" %>
+              </li>            
+            <% end %>
+            <% if user_signed_in? %>
+              <% if can? :new, Appointment %>
+                <li class="nav-item">
+                  <%= link_to "Appointments", user_appointments_path(current_user) %>
+                </li>
+              <% elsif can? :read, Appointment %>
+                <li class="nav-item">
+                  <%= link_to "Appointments", doctor_appointments_path(current_user) %>
+                </li>
+              <% end %>
+            <% end %> 
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <span class="navbar-text">
+                User: <%= current_user.username %> | 
+              </span>
+              <li class="nav-item">
+                <%= link_to "Exit", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <% if flash[:alert] %>
+        <br/>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= flash[:alert] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <% end %>
-      <% if user_signed_in? %>
-        <% if can? :new, Appointment %>
-          <%= link_to "Appointments", user_appointments_path(current_user) %>
-        <% elsif can? :read, Appointment %>
-          <%= link_to "Appointments", doctor_appointments_path(current_user) %>
-        <% end %>
+      <% if flash[:notice] %>
+        <br/>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <%= flash[:notice] %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <% end %>
-    </p>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p> 
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>
